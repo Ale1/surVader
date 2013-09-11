@@ -10,7 +10,7 @@ _your_surveys.erb
       <tr>
         <td><a class="my_surveys" href="/surveys/<%=survey.id%>"><%=survey.label%></a></td>
         <td><%=survey.description%></td>
-        <td><a id="eliminate" href='#'>Eliminate</a></td>
+        <td><a class="eliminate" href='#'>Eliminate</a></td>
       </tr>
     <% end %>
   </table>
@@ -18,9 +18,23 @@ _your_surveys.erb
 
 <script>
 $(document).ready(function() {
-  $('#eliminate').on('click', function(event){
+  $('.eliminate').on('click', function(event){
     event.preventDefault();
+    var link = event.target
+    var row = $(link).closest('tr');
+    var surveyName = row.find('.my_surveys').text();
 
+
+    $.ajax({
+      url: '/survey',
+      type: 'delete',
+      data: surveyName
+    }).done(function(response){
+      console.log('successful')
+      row.remove();
+    }).fail(function(jqXHR, textStatus, errorThrown){
+       console.log("fail" + errorThrown);
+     });
   });
 })
 </script>
