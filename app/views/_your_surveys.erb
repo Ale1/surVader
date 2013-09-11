@@ -1,0 +1,26 @@
+_your_surveys.erb
+<% if @surveys %>
+  <table class="table">
+    <tr>
+      <th>Survey Name</th>
+      <th>Survey Description</th>
+      <th>Destroy</th>
+    </tr>
+    <% @surveys.each do |survey| %>
+      <tr>
+        <td><a class="my_surveys" href="/surveys/<%=survey.id%>"><%=survey.label%></a></td>
+        <td><%=survey.description%></td>
+        <td><a id="eliminate" href='#'>Eliminate</a></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<script>
+$(document).ready(function() {
+  $('#eliminate').on('click', function(event){
+    event.preventDefault();
+
+  });
+})
+</script>
