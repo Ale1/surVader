@@ -54,9 +54,14 @@ get "/surveys/:survey_id/results/questions/:question_id" do
 end
 # ^ why are all these (44-54) instance variables?
 
+require 'pry'
 # AJAX controller for survey deletion
 delete '/survey' do
-  puts "*" * 80
-  puts params.inspect
-  puts "*" * 80
+  puts "*" * 90
+  puts params.keys[0]
+
+  survey = Survey.find_by_label(params.keys[0])
+  survey.destroy
+
+  erb :_destroy_success, layout: false
 end
