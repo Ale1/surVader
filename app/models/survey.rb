@@ -5,7 +5,9 @@ class Survey < ActiveRecord::Base
   # establish the association to the users/takers through the join, can alias :users to :takers
   # also look into the :dependent => :destroy option
   # http://guides.rubyonrails.org/association_basics.html (section 4.1.2.4)
-  has_many :questions
+  has_many :questions, dependent: :destroy
+  has_many :choices, through: :questions
+  has_many :responses, through: :choices
 
   #add validations
 

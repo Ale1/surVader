@@ -24,7 +24,6 @@ $(document).ready(function() {
     var row = $(link).closest('tr');
     var surveyName = row.find('.my_surveys').text();
 
-
     $.ajax({
       url: '/survey',
       type: 'delete',
